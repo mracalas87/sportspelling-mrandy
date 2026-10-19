@@ -1,8 +1,24 @@
 <!doctype html>
-<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <style>html,body{margin:0}[hidden]{display:none!important}</style>
 <title>Spelling Sports</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<style>html,body,*{touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}body{-webkit-user-select:none;user-select:none;overscroll-behavior:none}input{-webkit-user-select:text;user-select:text}</style>
+<script>
+(function(){
+  /* stop iPad double-tap and pinch zoom */
+  var last=0;
+  document.addEventListener('touchend',function(e){
+    var n=Date.now();
+    if(n-last<350&&e.cancelable&&!(e.target.closest&&e.target.closest('input'))){e.preventDefault();}
+    last=n;
+  },{passive:false});
+  ['gesturestart','gesturechange','gestureend','dblclick'].forEach(function(ev){
+    document.addEventListener(ev,function(e){e.preventDefault();},{passive:false});
+  });
+  document.addEventListener('touchmove',function(e){if(e.touches&&e.touches.length>1&&e.cancelable)e.preventDefault();},{passive:false});
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Bungee&family=Permanent+Marker&family=Nunito:wght@600;800&display=swap">
@@ -136,7 +152,7 @@ h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(30px,8vw,
   <h1 class="logo"><i>Spelling</i><br><span>Sports</span></h1>
   <div class="by"><img src="data:image/jpeg;base64,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" alt="Mr Andy" width="40" height="40"><span>Created by Mr Andy</span></div>
   <div class="card menu-card">
-    <p class="lead"><b>30 seconds to spell.</b> Every right answer earns 8 seconds of riding. Three in a row adds 4 more.</p>
+    <p class="lead"><b>30 seconds to spell.</b> Every right answer earns 2 seconds of riding. Three in a row adds 1 more.</p>
     <fieldset class="modes">
       <legend>Where to ride</legend>
       <label><input type="radio" name="mode" value="park" checked><span><svg viewBox="0 0 40 30" aria-hidden="true"><path d="M3 12 Q5 9 9 11 L31 11 Q35 9 37 12 Q35 15 31 14 L9 14 Q5 15 3 12Z" fill="#ffc83d"/><circle cx="11" cy="21" r="3.5" fill="#fffdf6"/><circle cx="29" cy="21" r="3.5" fill="#fffdf6"/></svg>Skate park<small>Free ride, tricks, grind rails</small></span></label>
@@ -1699,8 +1715,8 @@ function choose(btn){
   locked=true;asked++;
   var ok=btn.dataset.word===q[0];
   if(ok){
-    btn.classList.add('good');correct++;streak++;earned+=8;
-    if(streak%3===0){earned+=4;pop('3 IN A ROW +4s');}
+    btn.classList.add('good');correct++;streak++;earned+=2;
+    if(streak%3===0){earned+=1;pop('3 IN A ROW +1s');}
     sfx.good();
   }else{
     btn.classList.add('bad');streak=0;sfx.bad();
@@ -1714,17 +1730,17 @@ function updateSpellHud(){
   var t=Math.max(0,Math.ceil(spellLeft));
   $('sTime').textContent=t;
   $('sBar').style.transform='scaleX('+clamp(spellLeft/30,0,1)+')';
-  $('sEarn').textContent=Math.max(10,earned)+'s';
+  $('sEarn').textContent=Math.max(6,earned)+'s';
   $('sOk').textContent=correct;
 }
 function endSpell(){
   state='summary';spellLeft=0;updateSpellHud();
   try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}
-  rideTotal=Math.max(10,earned);
+  rideTotal=Math.max(6,earned);
   $('qCard').hidden=true;$('sumCard').hidden=false;
   $('sumH').textContent=correct===0?'Time! Keep going':correct+' right!';
   $('sumP').textContent=correct===0
-    ?'No right answers this time, so you get a quick 10 second ride. Spell more next round for a longer one.'
+    ?'No right answers this time, so you get a quick 6 second ride. Spell more next round for a longer one.'
     :'You earned '+rideTotal+' seconds of riding. Use the pads to steer, and jump to do tricks.';
   sfx.go();
 }
