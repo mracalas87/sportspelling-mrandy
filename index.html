@@ -42,6 +42,8 @@ body{margin:0;background:var(--sky);color:var(--ink);font-family:var(--body);fon
 .card,.btn,.pill,.pbtn,.opt,.chip span,.levels span,.modes span,.mini{pointer-events:auto}
 .logo{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(46px,13vw,72px);line-height:.88;text-align:center;color:var(--chalk);
   -webkit-text-stroke:4px var(--ink);paint-order:stroke fill;text-shadow:0 6px 0 var(--ink);letter-spacing:.01em}
+.charge{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(140px + env(safe-area-inset-bottom,0px));width:110px;height:18px;border:3px solid var(--ink);border-radius:10px;background:var(--chalk);overflow:hidden;pointer-events:none}
+.charge i{display:block;height:100%;width:100%;transform-origin:left center;transform:scaleX(0);background:#2f80ed}
 .qr{display:flex;align-items:center;gap:12px;padding:8px;border:3px solid var(--ink);border-radius:14px;background:#fff;font:600 13px/1.3 Nunito,sans-serif;color:var(--ink)}
 .qr img{width:104px;height:104px;flex:none}
 .by{display:flex;align-items:center;gap:8px;margin-top:-4px;padding:4px 14px 4px 4px;border:3px solid var(--ink);border-radius:99px;background:var(--chalk);font:800 14px Nunito,sans-serif;color:var(--ink);box-shadow:0 3px 0 var(--ink)}
@@ -57,7 +59,7 @@ body{margin:0;background:var(--sky);color:var(--ink);font-family:var(--body);fon
 fieldset{border:0;margin:0;padding:0;min-width:0}
 legend{font-family:var(--display);font-size:15px;letter-spacing:.06em;text-transform:uppercase;padding:0;margin-bottom:6px}
 .levels,.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.modes{grid-template-columns:repeat(3,1fr)}
+.modes{grid-template-columns:repeat(2,1fr)}
 .levels input,.modes input,.chip input{position:absolute;opacity:0;pointer-events:none}
 .levels span,.modes span{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:6px;border:3px solid var(--ink);border-radius:12px;background:var(--chalk);font-weight:800;font-size:14px;line-height:1.15;cursor:pointer}
 .levels span small,.modes span small{font-size:11px;font-weight:600;opacity:.8}
@@ -158,6 +160,7 @@ h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(30px,8vw,
       <legend>Where to ride</legend>
       <label><input type="radio" name="mode" value="park" checked><span><svg viewBox="0 0 40 30" aria-hidden="true"><path d="M3 12 Q5 9 9 11 L31 11 Q35 9 37 12 Q35 15 31 14 L9 14 Q5 15 3 12Z" fill="#ffc83d"/><circle cx="11" cy="21" r="3.5" fill="#fffdf6"/><circle cx="29" cy="21" r="3.5" fill="#fffdf6"/></svg>Skate park<small>Free ride, tricks, grind rails</small></span></label>
       <label><input type="radio" name="mode" value="bmx"><span><svg viewBox="0 0 40 30" aria-hidden="true"><circle cx="8" cy="21" r="6.5"/><circle cx="32" cy="21" r="6.5"/><path d="M8 21 L16 21 L21 11 L30 11 L32 21 M16 21 L25 21 L21 11 M19 8 L24 8 M30 11 L28 6 L33 6"/></svg>BMX dirt trail<small>Bike, dirt jumps, tricks</small></span></label>
+      <label><input type="radio" name="mode" value="horse"><span><svg viewBox="0 0 40 30" aria-hidden="true"><path d="M9 27 L12 14 Q13 7 20 5 L24 2 L25 7 Q31 8 34 14 L37 22 Q38 25 35 25 L31 22 Q27 27 23 24 L21 27 Z"/><path d="M13 14 Q18 12 22 8 M24 2 L25 6"/><circle cx="29" cy="12" r="1" fill="#12304a"/></svg>Horse jumping<small>Sand arena, show jumps</small></span></label>
       <label><input type="radio" name="mode" value="surf"><span><svg viewBox="0 0 40 30" aria-hidden="true"><path d="M6 24 Q8 6 20 3 Q32 6 34 24 Q20 20 6 24Z" fill="#ff8a1f" transform="rotate(35 20 15) scale(.9) translate(2 1.5)"/><path d="M2 27 Q7 22 12 27 T22 27 T32 27 T38 25" stroke="#14b8a6"/></svg>Surfing<small>Ride the wave, dodge sharks</small></span></label>
     </fieldset>
     <fieldset class="levels">
@@ -171,7 +174,7 @@ h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(30px,8vw,
       <label class="chip"><input type="checkbox" id="optSfx" checked><span>Sound effects</span></label>
     </div>
     <button id="goBtn" class="btn" type="button">Start</button>
-    <button id="designBtn" class="btn alt" type="button">Customise board, bike or surfboard</button>
+    <button id="designBtn" class="btn alt" type="button">Customise board, bike, surfboard or horse</button>
     <button id="wordsBtn" class="btn alt" type="button">See the spelling lists</button>
     <div class="qr"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZIAAAGXAQAAAACxNOvkAAADcklEQVR42u2cXW6jSBSFzzFI+A3vwNkJ7MyVlXWxE9gBfmiJ1mCfeagfbA+eTiY4LY1uPUSKUx8VXR3dun+YwmdXt8PnlzH/R+adee3RkaQDBnIPAGc6AFi28GB2M+aPMp7qgQvf4u+1WK4xVFhXAC1wWHt0EffMZmtjvswMJNkCgBePcoX6ZUcU7LLn8ZzWbG3MK5kHL9lc0kP0iwDqEcD4m3PWzj2YrY15DdORB7yXOApVuMk/oFGYRo15tR89CgAU/OhAFFGwrc5s5nJc9lzW/eiNIrkeoZqtjfkCo5ix7xDrPaeffEPI65MfvcQ95dNzSvOjxnwXM/4e0v26oo7ZeyVPjTjpcXmztTFfZWb0wgR/BeCyFgH4290+RKhyhfRQlC8koZIH6lAYkNRDEwDUplFjXslE1fbAlLXrkiIphR+acZQmNNIIFOqhGYCmUEs1jRqzgR+FnmsUM3CrUUk9QuZfSdKI0xyzKgDhlxvVmkaN2UajT+PR8fbPiTlKP9lSEzqmtlQKTlniAO4xkLW8rH9qzDZMj8fo83nO5GKfc9me/Wi++HMv9GrxqDF/iOEe4F0ICoRKlivUMderdmY3YzZi9ClmYBBqvMzfY320uaIW4+0f4tGr2dqY72fSzd4oJe4OIYvvCg3MKf2nzynN1sZsxgzUOcycQmSQJffRj5aohTm6WWr8cI/fNGrMJgxykd5DYx4m7ZFv9pjk+9X6KLH/l2e/ma2N2USjwDHm7JUcNeboE0AVLv6wqvW8vn144t5sbcyWTLyQWU2gAC/WYjEDBBqPM8HgTbsWv9h4YX0u2q39J+ZHjdnOj6KQByrpku76lNf/uCv539315bNzW7O1MVtqNMlS19Svd3HCtIlDULVOfwUJ/5AkXy5H8XnO5KIfbc3WxnyRuXuXNDQ74+p2OJMlRrAMravVc9oneb3d9ca8gvH/jC1j1/9eo3fvklIDQ28qZlUOOEAz3qAJsB6/MZtr9GZNQaNujhpNM6fMEWuV44MUsY63D0gzf2ZrY17iR/UhpgXOPOV2VAoW8jzfxfyoMZsz8+MHLn2y5kel+5pqfNnkpolqs1LGvJxxD3PRbolHq/wNJsvs/ikWr5bqgGnUmP/MlID4oZ16dk5HkqyCLLtdmJVqpBnDLr25Z7Y25lsZ2vfmGWPMtzJ/A6jaPc2M7xJeAAAAAElFTkSuQmCC" alt="QR code for sportspelling-mrandy.vercel.app" width="104" height="104"><span><b>Play on another device</b><br>Scan the code to open Spelling Sports.</span></div>
     <p class="hint">Use the four arrow pads to steer, push and brake. Jump with a direction held does a trick. In the skate park, jump onto a rail to grind. On a keyboard, use the arrow keys and Space.</p>
@@ -238,6 +241,7 @@ h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(30px,8vw,
       <button id="bR" class="pbtn r" type="button" aria-label="Steer right"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m9 4 10 8-10 8z"/></svg></button>
       <button id="bD" class="pbtn d" type="button" aria-label="Brake"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 19 4 8h16z"/></svg></button>
     </div>
+    <div id="charge" class="charge" hidden><i id="chargeI"></i></div>
     <button id="bJ" class="pbtn jump" type="button" aria-label="Jump">Ollie</button>
   </div>
 </section>
@@ -589,9 +593,9 @@ var LEVELS=[
 
 /* ---------- Modes ---------- */
 var TAU=Math.PI*2;
-var MODE_IDS=['park','bmx','surf'];
-var NAMES={park:'skateboard',bmx:'bike',surf:'surfboard'},NEXT={park:'bmx',bmx:'surf',surf:'park'};
-var PARTLAB={park:['Deck','Kicktails','Wheels'],bmx:['Frame','Pedals','Rims'],surf:['Board','Stripe','Fins']};
+var MODE_IDS=['park','bmx','surf','horse'];
+var NAMES={park:'skateboard',bmx:'bike',surf:'surfboard',horse:'horse'},NEXT={park:'bmx',bmx:'surf',surf:'horse',horse:'park'};
+var PARTLAB={park:['Deck','Kicktails','Wheels'],bmx:['Frame','Pedals','Rims'],surf:['Board','Stripe','Fins'],horse:['Coat','Mane and tail','Saddle cloth']};
 var MODES={
   park:{
     jumpLabel:'Ollie',plain:'OLLIE +10',
@@ -604,6 +608,7 @@ var MODES={
 };
 
 MODES.surf={jumpLabel:'Air',plain:'AIR +10',tips:'Left or Right: down or up the wave · Up: paddle faster · Down: slow · Air off the top for tricks · Sharks burst out of the wave from the right, so dodge them and the rocks'};
+MODES.horse={jumpLabel:'Jump',plain:'JUMP',tips:'Left or Right: steer · Up: canter · Down: walk · Hold Jump then let go: the longer you hold, the higher you fly · Clear the poles'};
 /* ---------- Trick library and set-up (which pad combo does which trick) ---------- */
 var LIB={
   park:[
@@ -644,15 +649,17 @@ var LIB={
     {id:'rodeo',name:'RODEO FLIP',pts:120,rate:11,delay:0.08,fx:1,r:1},
     {id:'backflip',name:'BACKFLIP',pts:100,rate:12,delay:0.08,fx:1},
     {id:'frontflip',name:'FRONTFLIP',pts:100,rate:12,delay:0.08,fx:-1}
-  ]
+  ],
+  horse:[{id:'jump',name:'JUMP',pts:0,rate:0,delay:0}]
 };
 var SLOTS=[['kick','Up'],['shove','Down'],['spinL','Left'],['spinR','Right'],['ud','Up + Down'],['ul','Up + Left'],['ur','Up + Right'],['dl','Down + Left'],['dr','Down + Right']];
 var DEFAULTS={
   park:{kick:'kickflip',shove:'shoveit',spinL:'fs360',spinR:'bs360',ud:'doubleflip',ul:'heelflip',ur:'laserflip',dl:'hardflip',dr:'spin720'},
   bmx:{kick:'tabletop',shove:'backflip',spinL:'fs360',spinR:'bs360',ud:'barspin',ul:'tailwhip',ur:'tablewhip',dl:'barspinspin',dr:'frontflip'},
-  surf:{kick:'rollflip',shove:'backflip',spinL:'fs360',spinR:'bs360',ud:'doubleroll',ul:'rollback',ur:'corkscrew',dl:'frontflip',dr:'spin720'}
+  surf:{kick:'rollflip',shove:'backflip',spinL:'fs360',spinR:'bs360',ud:'doubleroll',ul:'rollback',ur:'corkscrew',dl:'frontflip',dr:'spin720'},
+  horse:{kick:'jump',shove:'jump',spinL:'jump',spinR:'jump',ud:'jump',ul:'jump',ur:'jump',dl:'jump',dr:'jump'}
 };
-var LOAD={park:{},bmx:{},surf:{}};
+var LOAD={park:{},bmx:{},surf:{},horse:{}};
 MODE_IDS.forEach(function(m){SLOTS.forEach(function(sl){LOAD[m][sl[0]]=DEFAULTS[m][sl[0]];});});
 try{
   var st=JSON.parse(localStorage.getItem('spellskate.tricks2'));
@@ -1011,6 +1018,7 @@ function relD(it){
   return wrapS(P.s-it.s);
 }
 function groundAtW(wx,wz){
+  if(mode==='horse')return 0;
   var h=terrain(wx,wz);
   for(var k=0;k<items.length;k++){
     var it=items[k];
@@ -1343,13 +1351,13 @@ function groundH(x,s){
 }
 
 /* ---- vehicles (no rider: board and bike only) ---- */
-var PALETTE=[['Teal',0x14b8a6],['Orange',0xff8a1f],['Red',0xff5a36],['Gold',0xffc83d],['Purple',0x7a5cff],['Blue',0x2f80ed],['Pink',0xff6fb5],['Green',0x4cc24a],['Black',0x1d2328],['White',0xfffdf6]];
-var DESIGN={park:{main:0x14b8a6,trim:0xff8a1f,wheel:0xfffdf6},bmx:{main:0x14b8a6,trim:0xff8a1f,wheel:0xfffdf6},surf:{main:0xff8a1f,trim:0xfffdf6,wheel:0x1d2328}};
+var PALETTE=[['Teal',0x14b8a6],['Orange',0xff8a1f],['Red',0xff5a36],['Gold',0xffc83d],['Purple',0x7a5cff],['Blue',0x2f80ed],['Pink',0xff6fb5],['Green',0x4cc24a],['Black',0x1d2328],['White',0xfffdf6],['Chestnut',0x8a5a33],['Bay',0x6b3f22],['Palomino',0xd9a85b],['Grey',0xb9bec6]];
+var DESIGN={park:{main:0x14b8a6,trim:0xff8a1f,wheel:0xfffdf6},bmx:{main:0x14b8a6,trim:0xff8a1f,wheel:0xfffdf6},surf:{main:0xff8a1f,trim:0xfffdf6,wheel:0x1d2328},horse:{main:0x8a5a33,trim:0x2a1a10,wheel:0xff5a36}};
 try{
   var sd=JSON.parse(localStorage.getItem('spellskate.design'));
   MODE_IDS.forEach(function(m){['main','trim','wheel'].forEach(function(k){if(sd&&sd[m]&&typeof sd[m][k]==='number')DESIGN[m][k]=sd[m][k];});});
 }catch(e){}
-var DMAT={park:{},bmx:{},surf:{}},designing=false;
+var DMAT={park:{},bmx:{},surf:{},horse:{}},designing=false;
 MODE_IDS.forEach(function(m){['main','trim','wheel'].forEach(function(k){DMAT[m][k]=M(DESIGN[m][k]);});});
 var root=new THREE.Group();root.rotation.order='YXZ';scene.add(root);
 var lean=new THREE.Group();root.add(lean);
@@ -1434,6 +1442,102 @@ var surfBoardG=new THREE.Group();surfG.add(surfBoardG);
   SH(surfG,true,false);
 })();
 
+/* ---------- Horse and rider ---------- */
+var HMAX=0.7,hCh=0,hGo=0,hp=0;
+var horseG=new THREE.Group();horseG.scale.setScalar(0.95);horseG.visible=false;lean.add(horseG);
+var hBody=new THREE.Group();horseG.add(hBody);
+var hLegs=[],hTail,hTail2,hNeck,hRider,hMane=[];
+(function(){
+  var HM=DMAT.horse,coat=HM.main,mane=HM.trim,cloth=HM.wheel;
+  var skin=M(0xf1c9a0),jacket=M(0x1f3a8a),helm=M(0x1d2328),boot=M(0x2a1a10),hoof=M(0x2a2420),leather=M(0x6b3f22),white=M(0xfffdf6),dark=M(0x2a1f1a),belly=coat;
+  function sph(r,sx,sy,sz,x,y,z,mat,par){var m=new THREE.Mesh(new THREE.SphereGeometry(r,10,8),mat);m.scale.set(sx,sy,sz);m.position.set(x,y,z);(par||hBody).add(m);return m;}
+  /* barrel, chest, quarters, shoulders */
+  sph(0.5,0.62,0.58,1.3,0,1.35,0.1,coat);
+  sph(0.4,0.62,0.52,0.9,0,1.16,0.05,belly);
+  sph(0.46,0.64,0.66,0.7,0,1.42,-0.55,coat);
+  sph(0.5,0.66,0.64,0.72,0,1.4,0.78,coat);
+  [-1,1].forEach(function(s){sph(0.32,0.5,0.85,0.6,s*0.3,1.2,0.86,coat);sph(0.28,0.5,0.9,0.55,s*0.28,1.28,-0.5,coat);});
+  /* neck in two curved segments, head, mane */
+  hNeck=new THREE.Group();hNeck.position.set(0,1.6,-0.65);hBody.add(hNeck);
+  var n1=new THREE.Mesh(new THREE.CylinderGeometry(0.24,0.34,0.72,8),coat);n1.position.set(0,0.16,-0.2);n1.rotation.x=-0.5;hNeck.add(n1);
+  var n2=new THREE.Mesh(new THREE.CylinderGeometry(0.17,0.24,0.62,8),coat);n2.position.set(0,0.62,-0.58);n2.rotation.x=-0.85;hNeck.add(n2);
+  var head=new THREE.Mesh(new THREE.BoxGeometry(0.28,0.34,0.8),coat);head.position.set(0,0.55,-1.1);head.rotation.x=-0.75;hNeck.add(head);
+  var nose=new THREE.Mesh(new THREE.BoxGeometry(0.24,0.26,0.24),M(0x3a2a22));nose.position.set(0,0.26,-1.43);nose.rotation.x=-0.75;hNeck.add(nose);
+  var blaze=new THREE.Mesh(new THREE.BoxGeometry(0.07,0.01,0.55),white);blaze.position.set(0,0.175,-0.02);head.add(blaze);
+  var band=new THREE.Mesh(new THREE.BoxGeometry(0.31,0.04,0.04),dark);band.position.set(0,0.0,-0.22);head.add(band);
+  var band2=new THREE.Mesh(new THREE.BoxGeometry(0.31,0.04,0.04),dark);band2.position.set(0,0.12,0.18);head.add(band2);
+  [-1,1].forEach(function(s){
+    var eye=new THREE.Mesh(new THREE.SphereGeometry(0.05,6,5),helm);eye.position.set(s*0.145,0.08,0.05);head.add(eye);
+    var ear=new THREE.Mesh(new THREE.ConeGeometry(0.075,0.26,5),coat);ear.position.set(s*0.1,0.97,-0.63);ear.rotation.x=-0.2;hNeck.add(ear);
+  });
+  for(var q=0;q<7;q++){
+    var f=q/6,mm=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.24,0.14),mane);
+    mm.position.set(0,0.28+f*0.7,-0.02-f*0.72+0.12);mm.rotation.x=-0.5-f*0.35;hNeck.add(mm);hMane.push(mm);
+  }
+  /* tail in two parts so it swishes */
+  hTail=new THREE.Group();hTail.position.set(0,1.6,1.2);hBody.add(hTail);
+  var t1=new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.15,0.6,6),mane);t1.position.set(0,-0.26,0.06);hTail.add(t1);
+  hTail2=new THREE.Group();hTail2.position.set(0,-0.55,0.1);hTail.add(hTail2);
+  var t2=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.09,0.6,6),mane);t2.position.set(0,-0.28,0.02);hTail2.add(t2);
+  /* legs with knees, fetlocks and hooves; two white socks */
+  [[-0.22,-0.6,1,0,0],[0.22,-0.6,1,Math.PI,0],[-0.24,0.88,0,Math.PI,1],[0.24,0.88,0,0,0]].forEach(function(l,idx){
+    var up=new THREE.Group();up.position.set(l[0],1.2,l[1]);hBody.add(up);
+    var th=l[2]?0.1:0.13;
+    var u=new THREE.Mesh(new THREE.CylinderGeometry(th+0.04,th-0.01,0.6,7),coat);u.position.y=-0.29;up.add(u);
+    var knee=new THREE.Mesh(new THREE.SphereGeometry(0.085,6,5),coat);knee.position.y=-0.58;up.add(knee);
+    var lo=new THREE.Group();lo.position.y=-0.58;up.add(lo);
+    var sock=(idx===0||idx===3);
+    var lw=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.07,0.56,7),sock?white:coat);lw.position.y=-0.28;lo.add(lw);
+    var fet=new THREE.Mesh(new THREE.SphereGeometry(0.075,6,5),sock?white:coat);fet.position.set(0,-0.52,0.02);lo.add(fet);
+    var hf=new THREE.Mesh(new THREE.BoxGeometry(0.16,0.1,0.2),hoof);hf.position.set(0,-0.58,-0.02);lo.add(hf);
+    hLegs.push({up:up,lo:lo,front:!!l[2],ph:l[3]});
+  });
+  /* saddle cloth, saddle, stirrup leathers */
+  var sc=new THREE.Mesh(new THREE.BoxGeometry(0.64,0.07,0.66),cloth);sc.position.set(0,1.67,0.05);hBody.add(sc);
+  var sd=new THREE.Mesh(new THREE.BoxGeometry(0.42,0.11,0.52),leather);sd.position.set(0,1.75,0.05);hBody.add(sd);
+  /* rider */
+  hRider=new THREE.Group();hRider.position.set(0,1.8,0.05);hBody.add(hRider);
+  var torso=new THREE.Mesh(new THREE.BoxGeometry(0.4,0.62,0.28),jacket);torso.position.y=0.38;hRider.add(torso);
+  var rh=new THREE.Mesh(new THREE.SphereGeometry(0.17,8,6),skin);rh.position.y=0.84;hRider.add(rh);
+  var hm=new THREE.Mesh(new THREE.SphereGeometry(0.2,8,6,0,TAU,0,Math.PI/2),helm);hm.position.y=0.87;hRider.add(hm);
+  var pk=new THREE.Mesh(new THREE.BoxGeometry(0.22,0.03,0.12),helm);pk.position.set(0,0.88,-0.18);hRider.add(pk);
+  [-1,1].forEach(function(s){
+    var arm=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.1,0.5),jacket);arm.position.set(s*0.26,0.4,-0.22);arm.rotation.x=0.35;hRider.add(arm);
+    var hand=new THREE.Mesh(new THREE.SphereGeometry(0.06,6,5),skin);hand.position.set(s*0.26,0.3,-0.46);hRider.add(hand);
+    var lg=new THREE.Mesh(new THREE.BoxGeometry(0.14,0.56,0.18),white);lg.position.set(s*0.3,-0.02,0.0);lg.rotation.z=s*0.12;hRider.add(lg);
+    var bt=new THREE.Mesh(new THREE.BoxGeometry(0.15,0.3,0.2),boot);bt.position.set(s*0.34,-0.38,0.0);hRider.add(bt);
+  });
+  SH(horseG,true,false);
+})();
+function horseAnim(dt,spd,grounded,vy,charge){
+  if(grounded)hp+=dt*(1.5+spd*0.9);
+  var amp=grounded?clamp(0.18+spd*0.05,0.18,0.8):0,i,moving=spd>=1;
+  for(i=0;i<hLegs.length;i++){
+    var L=hLegs[i],tgtU,tgtL;
+    if(grounded){
+      var s2=Math.sin(hp+L.ph);
+      tgtU=moving?s2*amp:0;tgtL=moving?-Math.max(0,Math.sin(hp+L.ph+1.3))*amp*1.2:0;
+    }else if(vy>-2){
+      /* take-off and flight: knees snap up under the chest, hind legs fold behind */
+      if(L.front){tgtU=1.45;tgtL=-2.5;}else{tgtU=-0.8;tgtL=1.9;}
+    }else{
+      /* coming down: fronts reach out to land, hinds trail */
+      if(L.front){tgtU=0.55;tgtL=-0.15;}else{tgtU=-0.35;tgtL=0.7;}
+    }
+    var k=Math.min(1,16*dt);
+    L.up.rotation.x+=(tgtU-L.up.rotation.x)*k;L.lo.rotation.x+=(tgtL-L.lo.rotation.x)*k;
+  }
+  var cr=charge/HMAX;
+  hBody.position.y=(grounded?Math.abs(Math.sin(hp))*0.05*Math.min(1,spd/6):0)-cr*0.12;
+  /* nose up on the way up, nose down on the way down, haunches dip while charging */
+  hBody.rotation.x+=(((grounded?-cr*0.12:clamp(vy*0.03,-0.35,0.3)))-hBody.rotation.x)*Math.min(1,8*dt);
+  hNeck.rotation.x=Math.sin(hp)*0.05*Math.min(1,spd/6)+(grounded?0:-0.25)+cr*0.1;
+  hTail.rotation.x=0.3+Math.sin(hp*0.5)*0.15+Math.min(spd,12)*0.025+(grounded?0:0.35);
+  hTail2.rotation.x=Math.sin(hp*0.5+1.2)*0.25+0.1;
+  for(i=0;i<hMane.length;i++){hMane[i].rotation.z=Math.sin(hp+i*0.6)*0.18*Math.min(1,spd/5);}
+  hRider.rotation.x+=((-0.1-Math.min(spd,12)*0.012-(grounded?0:0.45)-cr*0.3)-hRider.rotation.x)*Math.min(1,10*dt);
+}
+
 var shadow=new THREE.Mesh(new THREE.CircleGeometry(1.1,16),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:0.2,depthWrite:false}));
 shadow.rotation.x=-Math.PI/2;scene.add(shadow);
 
@@ -1444,7 +1548,7 @@ function emitSpark(){
   for(var k=0;k<sparks.length;k++){
     var s=sparks[k];
     if(s.visible)continue;
-    var w=(mode==='park')?[P.wx,P.wz,P.hd]:toW(P.s+0.6,P.x),bx=-Math.sin(w[2]),bz=Math.cos(w[2]),sp2=rnd(2,6);
+    var w=(mode==='park'||mode==='horse')?[P.wx,P.wz,P.hd]:toW(P.s+0.6,P.x),bx=-Math.sin(w[2]),bz=Math.cos(w[2]),sp2=rnd(2,6);
     s.visible=true;s.position.set(w[0]+rnd(-0.15,0.15),P.y+0.1,w[1]);
     s.userData.vx=bx*sp2+rnd(-2,2);s.userData.vz=bz*sp2+rnd(-2,2);s.userData.vy=rnd(1.5,4);s.userData.life=rnd(0.2,0.45);
     return;
@@ -1456,7 +1560,7 @@ for(i=0;i<36;i++){
   dm.visible=false;dm.userData={vx:0,vy:0,vz:0,life:0};dusts.push(dm);scene.add(dm);
 }
 function emitDust(wx,wz,y,n,spread){
-  var col=mode==='park'?0xb9bdc3:(mode==='surf'?0xeaf7ff:0xc9a27a);
+  var col=mode==='park'?0xb9bdc3:(mode==='surf'?0xeaf7ff:(mode==='horse'?0xdcc48e:0xc9a27a));
   for(var c=0;c<n;c++)for(var k=0;k<dusts.length;k++){
     var d=dusts[k];
     if(d.visible)continue;
@@ -1618,6 +1722,90 @@ function spawnSurf(){
   while(spawnS<P.s+150){addSurfObs(spawnS);spawnS+=rnd(15,24);}
 }
 
+/* ---------- Sand arena and show jumps ---------- */
+var AX=36,AZ=28;
+var horseWorld=new THREE.Group();horseWorld.visible=false;scene.add(horseWorld);
+(function(){
+  var c=mkCanvas(256),x=c.getContext('2d'),k;
+  x.fillStyle='#d8bd8a';x.fillRect(0,0,256,256);
+  blotch(x,256,14,'255,235,190',0.16,20,60);blotch(x,256,10,'170,130,80',0.14,20,60);
+  x.strokeStyle='rgba(140,100,55,0.2)';x.lineWidth=2;
+  for(k=0;k<24;k++){var yy=k*11+3;x.beginPath();x.moveTo(0,yy);x.lineTo(256,yy+rnd(-2,2));x.stroke();}
+  speckle(x,256,3000,0.1,2);
+  var sandT=finishTex(c,10,8);
+  var sand=new THREE.Mesh(new THREE.PlaneGeometry(AX*2,AZ*2),new THREE.MeshPhongMaterial({color:0xffffff,map:sandT,shininess:0,specular:0x000000}));
+  sand.rotation.x=-Math.PI/2;sand.position.y=0.01;sand.receiveShadow=true;horseWorld.add(sand);
+  var gc=mkCanvas(128),gx=gc.getContext('2d');
+  gx.fillStyle='#79b552';gx.fillRect(0,0,128,128);blotch(gx,128,10,'60,130,50',0.2,10,30);blotch(gx,128,8,'150,210,100',0.15,10,30);speckle(gx,128,900,0.12,2);
+  var grass=new THREE.Mesh(new THREE.PlaneGeometry(600,600),new THREE.MeshPhongMaterial({color:0xffffff,map:finishTex(gc,60,60),shininess:0,specular:0x000000}));
+  grass.rotation.x=-Math.PI/2;grass.position.y=-0.03;grass.receiveShadow=true;horseWorld.add(grass);
+  /* white boards with posts */
+  var wood=M(0xfffdf6),rail=M(0x14b8a6);
+  function wall(w,d,px,pz){var b=box(w,0.95,d,px,0.48,pz,wood);horseWorld.add(b);var r=box(w+(w>d?0:0),0.12,d,px,1.0,pz,rail);r.scale.set(w>d?1:1.6,1,w>d?1.6:1);horseWorld.add(r);}
+  wall(AX*2+0.5,0.22,0,-AZ-0.1);wall(AX*2+0.5,0.22,0,AZ+0.1);wall(0.22,AZ*2+0.5,-AX-0.1,0);wall(0.22,AZ*2+0.5,AX+0.1,0);
+  for(k=-AX;k<=AX;k+=6){horseWorld.add(box(0.3,1.15,0.3,k,0.58,-AZ-0.1,wood));horseWorld.add(box(0.3,1.15,0.3,k,0.58,AZ+0.1,wood));}
+  for(k=-AZ;k<=AZ;k+=6){horseWorld.add(box(0.3,1.15,0.3,-AX-0.1,0.58,k,wood));horseWorld.add(box(0.3,1.15,0.3,AX+0.1,0.58,k,wood));}
+  /* dressage letters on the boards */
+  function letter(ch,px,pz,ry){
+    var lc=mkCanvas(64),l2=lc.getContext('2d');
+    l2.fillStyle='#fffdf6';l2.fillRect(0,0,64,64);l2.strokeStyle='#12304a';l2.lineWidth=4;l2.strokeRect(2,2,60,60);
+    l2.fillStyle='#12304a';l2.font='bold 44px sans-serif';l2.textAlign='center';l2.textBaseline='middle';l2.fillText(ch,32,35);
+    var m=new THREE.Mesh(new THREE.PlaneGeometry(0.8,0.8),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(lc)}));
+    m.position.set(px,0.5,pz);m.rotation.y=ry;horseWorld.add(m);
+  }
+  letter('A',0,AZ-0.2,Math.PI);letter('C',0,-AZ+0.2,0);
+  letter('K',-AX+0.2,-18,Math.PI/2);letter('E',-AX+0.2,0,Math.PI/2);letter('H',-AX+0.2,18,Math.PI/2);
+  letter('F',AX-0.2,-18,-Math.PI/2);letter('B',AX-0.2,0,-Math.PI/2);letter('M',AX-0.2,18,-Math.PI/2);
+  /* trees and a stable block outside */
+  for(k=0;k<30;k++){
+    var a=rnd(0,TAU),tx=Math.cos(a)*rnd(50,110),tz=Math.sin(a)*rnd(42,95);
+    if(Math.abs(tx)<AX+8&&Math.abs(tz)<AZ+8)continue;
+    var tr=makeTree();tr.position.set(tx,0,tz);horseWorld.add(tr);
+  }
+  var stable=new THREE.Group();
+  stable.add(box(22,4,8,0,2,0,M(0xb8452e)));
+  var roof=box(23,0.5,9.5,0,4.2,0,M(0x4a3a30));stable.add(roof);
+  for(k=-8;k<=8;k+=4)stable.add(box(2.2,2.8,0.2,k,1.4,4.05,M(0xfffdf6)));
+  SH(stable,true,true);stable.position.set(-12,0,-AZ-14);horseWorld.add(stable);
+  var stable2=stable.clone();stable2.position.set(30,0,AZ+16);stable2.rotation.y=Math.PI;horseWorld.add(stable2);
+})();
+var POLE_TIER=[[0x2f80ed,0xfffdf6],[0x4cc24a,0xfffdf6],[0xff5a36,0xfffdf6]];
+var poleMatCache={};
+function poleMat(c){return poleMatCache[c]||(poleMatCache[c]=M(c));}
+function makePole(len,cols){
+  var g=new THREE.Group(),n=8,sl=len/n,i;
+  for(i=0;i<n;i++){
+    var s=new THREE.Mesh(new THREE.CylinderGeometry(0.1,0.1,sl,8),poleMat(cols[i%2]));
+    s.rotation.z=Math.PI/2;s.position.x=-len/2+sl*(i+0.5);g.add(s);
+  }
+  return g;
+}
+function wFence(x,z,yaw,h,oxer){
+  var g=new THREE.Group(),W=5.2,tier=h<0.85?0:(h<1.45?1:2),cols=POLE_TIER[tier],wood=M(0xf4efe4),top=new THREE.Group(),i,sd;
+  var zs=oxer?[0.5,-0.5]:[0];
+  zs.forEach(function(zo){
+    [-1,1].forEach(function(s){
+      g.add(box(0.26,h+0.65,0.26,s*(W/2+0.1),(h+0.65)/2,zo,wood));
+      var cap=new THREE.Mesh(new THREE.SphereGeometry(0.2,8,6),poleMat(cols[0]));cap.position.set(s*(W/2+0.1),h+0.72,zo);g.add(cap);
+    });
+  });
+  /* lower poles stay up, the top pole drops when hit */
+  var step=h>1.1?3:2;
+  for(i=1;i<step+1&&h>0.7;i++){
+    var lp=makePole(W,cols);lp.position.y=h*(i/(step+1))*0.9;g.add(lp);
+  }
+  zs.forEach(function(zo,qi){var tp=makePole(W,cols);tp.position.set(0,qi?0.12:0,zo);top.add(tp);});
+  top.position.y=h;g.add(top);
+  SH(g,true,false);placeW(g,x,z,yaw);
+  var it=freeItem({kind:'fence',mesh:g,h:h,hw:W/2+0.1,hz:oxer?0.8:0.3,top:top,fell:false},x,z,yaw);
+  return it;
+}
+var HCOURSE=[
+  [-22,-16,0.2,0.6,0],[-6,-19,-0.3,0.9,0],[12,-18,0.4,1.2,1],[27,-8,1.7,0.9,0],
+  [24,10,2.6,1.5,0],[8,15,3.3,1.2,0],[-10,12,3.9,1.8,1],[-27,4,-1.5,1.5,0],
+  [0,-9,0,2.0,1],[0,7,0,0.6,0],[-14,-4,0.8,0.6,0],[14,2,-0.8,0.9,0]
+];
+function buildHorseCourse(){HCOURSE.forEach(function(c){wFence(c[0],c[1],c[2],c[3],!!c[4]);});}
 function resetWorld(){
   items.forEach(function(it){scene.remove(it.mesh);});
   items.length=0;
@@ -1627,6 +1815,9 @@ function resetWorld(){
   if(mode==='park'){
     buildParkWorld();
     P.wx=0;P.wz=24;P.hd=0;P.chd=0;P.turn=0;
+  }else if(mode==='horse'){
+    buildHorseCourse();
+    P.wx=0;P.wz=21;P.hd=0;P.chd=0;P.turn=0;hCh=0;hGo=0;
   }else if(mode==='surf'){
     spawnS=45;
     palms.forEach(function(g){placePalm(g,rnd(-150,25));});
@@ -1646,7 +1837,7 @@ function resetWorld(){
 function setMode(m){
   mode=m;TRICKS=MODES[m].tricks;
   var park=(m==='park');
-  dirtG.visible=(m==='bmx');dirtGround.visible=(m==='bmx');parkG.visible=park;surfWorld.visible=(m==='surf');
+  dirtG.visible=(m==='bmx');dirtGround.visible=(m==='bmx');parkG.visible=park;surfWorld.visible=(m==='surf');horseWorld.visible=(m==='horse');horseG.visible=(m==='horse');
   skateG.visible=park;bikeG.visible=(m==='bmx');surfG.visible=(m==='surf');
   $('bJ').textContent=MODES[m].jumpLabel;
   $('tips').textContent=MODES[m].tips;
@@ -1667,7 +1858,7 @@ try{
   var lv=parseInt(localStorage.getItem('spellskate.level'),10);
   if(lv>=0&&lv<=2){var r=document.querySelector('input[name=lv][value="'+lv+'"]');if(r)r.checked=true;}
   var sm2=localStorage.getItem('spellskate.mode');
-  if(sm2==='park'||sm2==='bmx'||sm2==='surf'){var r2=document.querySelector('input[name=mode][value="'+sm2+'"]');if(r2)r2.checked=true;}
+  if(sm2==='park'||sm2==='bmx'||sm2==='surf'||sm2==='horse'){var r2=document.querySelector('input[name=mode][value="'+sm2+'"]');if(r2)r2.checked=true;}
 }catch(e){}
 setMode(selMode());
 Array.prototype.forEach.call(document.querySelectorAll('input[name=mode]'),function(r){
@@ -1756,7 +1947,7 @@ function startRide(){
 }
 function hit(){
   P.v*=0.35;hitCool=1;shake=0.5;bail=0.6;P.vx*=0.4;
-  pop(mode==='surf'?'WIPEOUT!':'OUCH!');sfx.bad();
+  pop(mode==='surf'?'WIPEOUT!':(mode==='horse'?'POLE DOWN!':'OUCH!'));sfx.bad();
 }
 function jumpV(){return mode==='bmx'?clamp(5.5+P.v*0.32,7,13):(mode==='surf'?9:8);}
 function pickTrick(){
@@ -1784,7 +1975,7 @@ function ride(dt,t){
   var target=ending?0:Math.min(22,14+(rideTotal-rideLeft)*0.12);
   if(pushing)target+=8;
   if(braking)target=Math.max(6,target-8);
-  var free=(mode==='park');
+  var free=(mode==='park'||mode==='horse');
   var slp=0;
   if(free&&P.grounded&&!P.grind){
     var fx0=Math.sin(P.hd),fz0=-Math.cos(P.hd);
@@ -1797,12 +1988,13 @@ function ride(dt,t){
   if(free){
     target=ending?0:(braking?0:(pushing?18:8));
     if(Math.abs(slp)>0.12&&!pushing&&!braking&&!ending)target=P.v;
+    if(mode==='horse')target=ending?0:(braking?1.8:(pushing?12:6.5));
   }
   var accel=ending?10:(braking?18:(P.v<target?(pushing?12:8):3));
   P.v+=clamp(target-P.v,-accel*dt,accel*dt);
   var dir=(ending||P.grind)?0:((inp.r?1:0)-(inp.l?1:0));
   if(free){
-    var tr=dir*(P.grounded?2.4:1.4)*(1-Math.min(0.45,Math.max(0,P.v-8)*0.03));
+    var tr=dir*(P.grounded?2.4:1.4)*(1-Math.min(0.45,Math.max(0,P.v-8)*0.03))*(mode==='horse'?0.8:1);
     P.hd+=tr*dt;P.turn+=(tr-P.turn)*Math.min(1,10*dt);
     if(!P.grind){
       var fx=Math.sin(P.hd),fz=-Math.cos(P.hd);
@@ -1817,7 +2009,7 @@ function ride(dt,t){
           P.v=-Math.min(Math.abs(P.v),2);
         }
       }
-      var bx2=HX-1.2,bz2=HZ-1.2;
+      var bx2=(mode==='horse'?AX:HX)-1.2,bz2=(mode==='horse'?AZ:HZ)-1.2;
       if(Math.abs(P.wx)>bx2||Math.abs(P.wz)>bz2){
         P.wx=clamp(P.wx,-bx2,bx2);P.wz=clamp(P.wz,-bz2,bz2);
         if(wallCool<=0&&P.v>3&&groundAtW(P.wx,P.wz)<0.4){P.v*=0.3;shake=Math.max(shake,0.2);sfx.land();wallCool=0.6;}
@@ -1833,6 +2025,14 @@ function ride(dt,t){
 
   var gh=free?groundAtW(P.wx,P.wz):groundH(P.x,P.s);
   jumpBuf=Math.max(0,jumpBuf-dt);
+  if(mode==='horse'){
+    jumpBuf=0;
+    /* hold Jump to charge, let go to leap: the longer the hold, the higher the jump */
+    if(inp.j&&P.grounded&&!P.grind&&!ending){
+      hCh=Math.min(HMAX,hCh+dt);
+      if(hCh>=HMAX){hGo=hCh;hCh=0;}
+    }else if(hCh>0){if(P.grounded&&!ending)hGo=hCh;hCh=0;}
+  }
   if(mode==='surf'&&P.grounded&&!P.grind&&!ending&&P.x>6.1&&P.vx>0.5){
     /* thrown off the lip of the wave */
     P.grounded=false;P.vy=Math.max(11,lastRate+4);airT=0;flipAng=0;
@@ -1867,6 +2067,8 @@ function ride(dt,t){
   }else if(P.grounded){
     if(P.y-gh>(mode==='surf'?0.6:0.2)){
       P.grounded=false;P.vy=Math.max(lastRate,0);airT=0;flipAng=0;flipping=false;
+    }else if(mode==='horse'&&hGo>0&&!ending){
+      P.vy=5.2+6.4*clamp((hGo-0.08)/0.62,0,1);hGo=0;P.grounded=false;airT=0;flipAng=0;flipping=false;sfx.ollie();
     }else if(jumpBuf>0&&!ending){
       jumpBuf=0;
       P.vy=(gh>0.25&&lastRate>1)?Math.min(14,lastRate+6.5):jumpV();
@@ -1899,23 +2101,36 @@ function ride(dt,t){
     if(!P.grind&&P.y<=gh&&P.vy<=0){
       P.y=gh;P.grounded=true;P.vy=0;lastRate=0;
       var msg=null,pts=0;
-      if(airT>=1.1){msg='HUGE AIR +100';pts=100;}
+      if(mode==='horse'){}else if(airT>=1.1){msg='HUGE AIR +100';pts=100;}
       else if(airT>=0.75){msg='BIG AIR +50';pts=50;}
       if(flipping&&flipAng>=TAU-0.01){var td=TRICKS[trick];pts+=td.pts;msg=msg?msg+' + '+td.name:td.name+' +'+td.pts;}
       if(pts){style+=pts;pop(msg);sfx.big();}
       if(airT>0.25){
         shake=Math.max(shake,Math.min(0.3,airT*0.25));sfx.land();
-        var lw=(mode==='park')?[P.wx,P.wz]:toW(P.s,P.x);emitDust(lw[0],lw[1],gh+0.1,8,2.2);
+        var lw=(mode==='park'||mode==='horse')?[P.wx,P.wz]:toW(P.s,P.x);emitDust(lw[0],lw[1],gh+0.1,8,2.2);
       }
       flipAng=0;flipping=false;
     }
   }
   P.gh=gh;
+  if(mode==='horse')hGo=0;
 
   hitCool=Math.max(0,hitCool-dt);wallCool=Math.max(0,wallCool-dt);
+  if(mode==='horse'){
+    for(var qf=0;qf<items.length;qf++){
+      var fe=items[qf];if(fe.kind!=='fence')continue;
+      var fd=localAt(fe,P.wx,P.wz),fl=RX,near=Math.abs(fl)<fe.hw+0.2&&Math.abs(fd)<fe.hz+0.5;
+      fe.top.position.y+=((fe.fell?0.1:fe.h)-fe.top.position.y)*Math.min(1,12*dt);
+      fe.top.rotation.z+=((fe.fell?0.35:0)-fe.top.rotation.z)*Math.min(1,10*dt);
+      if(!ending&&near){
+        if(P.y<fe.h-0.25){if(!fe.fell&&hitCool<=0){fe.fell=true;fe.cl=true;hit();}}
+        else if(!fe.cl&&!fe.fell){fe.cl=true;var fp=Math.round(fe.h*40);style+=fp;pop('CLEAR! +'+fp);sfx.good();}
+      }else if(Math.abs(fd)>fe.hz+3||Math.abs(fl)>fe.hw+3){fe.cl=false;fe.fell=false;}
+    }
+  }
   for(var k=0;k<items.length;k++){
     var it=items[k];
-    if(it.kind==='ramp'||it.kind==='pipe'||it.kind==='pyr')continue;
+    if(it.kind==='ramp'||it.kind==='pipe'||it.kind==='pyr'||it.kind==='fence')continue;
     if(it.dead){
       it.t+=dt;
       if(it.t<0.7){it.mesh.position.x+=it.kx*dt;it.mesh.position.z+=it.kz*dt;it.vy-=22*dt;it.mesh.position.y=Math.max(0,it.mesh.position.y+it.vy*dt);it.mesh.rotation.z+=9*dt;}
@@ -1991,6 +2206,14 @@ function ride(dt,t){
       dustT-=dt;
       if(dustT<=0){var sw2=toW(P.s+1.3,P.x);emitDust(sw2[0],sw2[1],P.y+0.15,1,0.8);dustT=0.05;}
     }
+  }else if(mode==='horse'){
+    horseAnim(dt,Math.abs(P.v),P.grounded,P.vy,hCh);
+    if(P.grounded&&P.v>3){
+      dustT-=dt;
+      if(dustT<=0){emitDust(P.wx+Math.sin(P.hd)*0.9,P.wz-Math.cos(P.hd)*0.9,0.15,1,0.6);dustT=P.v>9?0.07:0.14;}
+    }
+    var chE=$('charge');chE.hidden=!(hCh>0);
+    if(hCh>0){var fr=hCh/HMAX;$('chargeI').style.transform='scaleX('+fr+')';$('chargeI').style.background=fr<0.3?'#2f80ed':(fr<0.62?'#4cc24a':'#ff5a36');}
   }else{
     bikeFrame.rotation.z=Math.sin(flipAng/TAU*Math.PI)*(TT.tab||0);
     bikeFrame.rotation.y=flipAng*(TT.fy||0);
@@ -2016,14 +2239,14 @@ function ride(dt,t){
   if(free){
     P.chd+=angDiff(P.hd,P.chd)*Math.min(1,5*dt);
     var sc=Math.sin(P.chd),cc=Math.cos(P.chd);
-    cb=[P.wx-sc*6.6,P.wz+cc*6.6];cl=[P.wx+sc*9,P.wz-cc*9];
+    var cd=(mode==='horse')?8.4:6.6,co=(mode==='horse')?2.6:0;cb=[P.wx-sc*cd+cc*co,P.wz+cc*cd+sc*co];cl=[P.wx+sc*9,P.wz-cc*9];
   }else{cb=toW(P.s-6.6,P.x*0.7);cl=toW(P.s+9,P.x*0.85);}
-  var cx=cb[0],cy=2.6+P.y*0.6,cz=cb[1];
+  var cx=cb[0],cy=(mode==='horse'?3.6:2.6)+P.y*0.6,cz=cb[1];
   if(shake>0){cx+=rnd(-1,1)*shake*0.4;cy+=rnd(-1,1)*shake*0.4;shake=Math.max(0,shake-dt*1.6);}
   cam.position.x+=(cx-cam.position.x)*lerpK;
   cam.position.y+=(cy-cam.position.y)*lerpK;
   cam.position.z+=(cz-cam.position.z)*lerpK;
-  cam.lookAt(cl[0],0.8+P.y*0.5,cl[1]);
+  cam.lookAt(cl[0],(mode==='horse'?1.2:0.8)+P.y*0.5,cl[1]);
   cam.fov=baseFov+clamp((P.v-14)*0.45,0,8);cam.updateProjectionMatrix();
 
   /* world upkeep */
@@ -2074,12 +2297,14 @@ function idle(dt,t){
   root.position.set(0,(mode==='surf')?surfH(0):0,iz);root.rotation.set(0,0,0);lean.rotation.set(0,0,0);lean.position.y=Math.sin(t*2)*0.02;
   boardG.rotation.set(0,0,0);surfBoardG.rotation.set(0,0,0);bikeFrame.rotation.set(0,0,0);bars.rotation.set(0,0,0);
   shadow.position.set(0,((mode==='surf')?surfH(0):0)+0.06,iz);shadow.scale.setScalar(1);shadow.material.opacity=0.2;
+  if(mode==='horse')horseAnim(dt,5.5,true,0,0);
   updateParticles(dt);focusSun(0,iz);
   cam.fov=baseFov;cam.updateProjectionMatrix();
   var a=t*0.35;
-  var orb=designing?4.4:5.4;
-  cam.position.set(Math.sin(a)*orb,designing?1.6:1.9,iz+Math.cos(a)*orb);
-  cam.lookAt(0,designing?-0.8:0.6,iz);
+  var hz2=(mode==='horse');
+  var orb=(designing?4.4:5.4)*(hz2?1.6:1);
+  cam.position.set(Math.sin(a)*orb,hz2?2.4:(designing?1.6:1.9),iz+Math.cos(a)*orb);
+  cam.lookAt(0,hz2?1.3:(designing?-0.8:0.6),iz);
 }
 
 /* ---------- Main loop ---------- */
@@ -2187,7 +2412,8 @@ function renderDesign(){
     t.addEventListener('click',function(){dView=v[0];renderDesign();});
     seg.appendChild(t);
   });
-  box.appendChild(seg);
+  if(m==='horse')dView='look';
+  if(m!=='horse')box.appendChild(seg);
   if(dView==='tricks'){renderTrickRows(box,m);return;}
   var pl=PARTLAB[m],parts=[['main',pl[0]],['trim',pl[1]],['wheel',pl[2]]];
   var tabs=document.createElement('div');tabs.className='dtabs';
