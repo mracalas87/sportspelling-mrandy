@@ -88,8 +88,7 @@ legend{font-family:var(--display);font-size:15px;letter-spacing:.06em;text-trans
 .qtext{margin:0;font-size:clamp(20px,5.4vw,28px);line-height:1.3;font-weight:800;text-wrap:balance}
 .blank{display:inline-block;width:3.2em;border-bottom:4px solid var(--ink);vertical-align:-2px;margin:0 2px}
 .options{display:grid;grid-template-columns:1fr;gap:10px}
-@media (min-width:560px){.options{grid-template-columns:repeat(3,1fr)}}
-.opt{display:flex;align-items:center;justify-content:center;gap:8px;min-height:58px;padding:8px 10px;border:3px solid var(--ink);border-radius:14px;background:var(--chalk);box-shadow:0 4px 0 var(--ink);font-family:var(--display);font-size:clamp(22px,6vw,28px);color:var(--ink);cursor:pointer;word-break:break-word}
+.opt{display:flex;align-items:center;justify-content:center;gap:8px;min-height:58px;padding:8px 10px;border:3px solid var(--ink);border-radius:14px;background:var(--chalk);box-shadow:0 4px 0 var(--ink);font-family:var(--display);font-size:clamp(22px,6vw,28px);color:var(--ink);cursor:pointer;white-space:nowrap;overflow-wrap:normal;word-break:normal;hyphens:none;min-width:0}
 .opt:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
 .opt kbd{font-family:var(--body);font-weight:800;font-size:12px;border:2px solid var(--ink);border-radius:6px;padding:0 6px;opacity:.6}
 .opt.good{background:var(--leaf)}
@@ -604,7 +603,7 @@ var MODES={
   }
 };
 
-MODES.surf={jumpLabel:'Air',plain:'AIR +10',tips:'Left or Right: down or up the wave · Up: paddle faster · Down: slow · Air off the top for tricks · Dodge sharks and rocks'};
+MODES.surf={jumpLabel:'Air',plain:'AIR +10',tips:'Left or Right: down or up the wave · Up: paddle faster · Down: slow · Air off the top for tricks · Sharks burst out of the wave from the right, so dodge them and the rocks'};
 /* ---------- Trick library and set-up (which pad combo does which trick) ---------- */
 var LIB={
   park:[
@@ -1605,14 +1604,14 @@ function makeShark(){
   return g;
 }
 function addShark(s){
-  var g=makeShark(),x0=rnd(-3,2.5);
-  placeAt(g,s,x0);g.position.y=surfH(x0)-0.1;scene.add(g);
-  items.push({kind:'block',mesh:g,x:x0,x0:x0,amp:rnd(2.2,3.6),f:rnd(0.7,1.2),ph:rnd(0,6.28),s:s,hw:0.7,hz:1.5,h:1.0,prevD:-999,move:true});
+  var g=makeShark(),x0=8.6;
+  placeAt(g,s,x0,Math.PI/2);g.position.y=surfH(x0)-1.5;g.visible=false;scene.add(g);
+  items.push({kind:'block',mesh:g,x:x0,x0:x0,sp:rnd(4.5,6.5),go:rnd(26,36),s:s,hw:1.5,hz:0.8,h:1.0,prevD:-999,move:true,out:false});
 }
 function addSurfObs(s){
   var r=Math.random();
-  if(r<0.5)addRock(s,rnd(-6,5.5));
-  else if(r<0.8)addShark(s);
+  if(r<0.55)addRock(s,rnd(-6,5.5));
+  else if(r<0.75)addShark(s);
   else{addRock(s,rnd(-6,-1));addRock(s+3,rnd(1,5.5));}
 }
 function spawnSurf(){
@@ -1923,12 +1922,17 @@ function ride(dt,t){
       continue;
     }
     if(it.move){
-      var mph=t*it.f+it.ph;it.x=it.x0+Math.sin(mph)*it.amp;
-      placeAt(it.mesh,it.s,it.x,Math.cos(mph)>=0?-Math.PI/2:Math.PI/2);
-      it.mesh.position.y=surfH(it.x)-0.1;
+      /* sleeps inside the wave, then bursts out of the crest and cuts across the face from right to left */
+      if(!it.out&&it.s-P.s<it.go&&!ending){it.out=true;it.mesh.visible=true;}
+      if(it.out&&it.x>-9)it.x-=it.sp*dt;
+      var rise=clamp((8.4-it.x)/3,0,1);
+      placeAt(it.mesh,it.s,it.x,Math.PI/2);
+      it.mesh.position.y=surfH(Math.min(it.x,11))-1.5+1.4*rise;
+      if(it.x<=-9)it.mesh.visible=false;
     }
     var d=relD(it),lx=RX;
     if(ending)continue;
+    if(it.move&&(!it.out||!it.mesh.visible))continue;
     if(it.kind==='rail'){
       if(!P.grind&&hitCool<=0&&P.y<it.h-0.25&&Math.abs(lx)<0.55&&d>-0.4&&d<it.len+0.4){
         hit();
