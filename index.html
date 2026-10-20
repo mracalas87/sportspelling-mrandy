@@ -1051,11 +1051,12 @@ var RAMPS={
 };
 Object.keys(RAMPS).forEach(function(k){var r=RAMPS[k];r.geo=profGeo(r.W,r.L,r.H,r.fn,r.N);});
 var dirtRampMat=M(0xffffff,texDirt('#b86a2e',false,1,1));
-var snowRampMat=M(0xffffff,texSnow('#f6fbff',false,1,1));
+var snowRampMat=M(0xffffff,texSnow('#6f9fcf',false,1,1));
 function box(w,h,d,x,y,z,mat){var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);return m;}
 function buildRamp(type,park){
   var r=RAMPS[type],g=new THREE.Group();
   g.add(new THREE.Mesh(r.geo,park?concRamp:(mode==='snow'?snowRampMat:dirtRampMat)));
+  if(mode==='snow'&&!park&&type==='kicker')g.add(box(r.W+0.1,0.14,0.4,0,r.H+0.02,-r.L+0.2,orangeMat));
   if(park){
     if(type==='funbox'){
       [-1,1].forEach(function(sx){g.add(box(0.14,0.08,5,sx*r.W/2,r.H+0.02,-5,orangeMat));});
@@ -1273,7 +1274,7 @@ function buildParkWorld(){
 
 /* ---- obstacles and rails ---- */
 var logGeo=new THREE.CylinderGeometry(0.38,0.38,5,8);logGeo.rotateZ(Math.PI/2);logGeo.translate(0,0.38,0);
-var logMat=M(0x7a4a28),snowLogMat=M(0xd5dee7),snowConeMat=M(0x2f80ed);
+var logMat=M(0x7a4a28),snowLogMat=M(0x6b4423),snowConeMat=M(0x2f80ed);
 var coneGeo=new THREE.ConeGeometry(0.4,0.9,8);coneGeo.translate(0,0.45,0);
 var coneMat=M(0xff6a1f),coneBase=M(0x1d2328);
 var RAILL=9,RAILH=0.9;
